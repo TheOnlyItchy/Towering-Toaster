@@ -1,5 +1,6 @@
 class Main {
   public static void main(String[] args) {
-    System.out.println("Hello world!");
+    Player hero = new Player(level, name, attackPwr, health);
+    Dungeon FloorOne = new Dungeon(5);
   }
 }
