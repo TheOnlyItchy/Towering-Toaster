@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Random;
 
 class Main {
@@ -8,7 +9,8 @@ class Main {
     
 
     //makes a list of monsters
-    Creature[] monsters = createMonsters();
+    ArrayList<String> Monsters = new ArrayList<>();
+    createMonsters();
 
     //creates the player
     Player hero = printIntro();
@@ -22,6 +24,13 @@ class Main {
   public static Creature[] createMonsters(){
     //uncertain how levels for monsters will work. maybe a multiplyer? ex. level 4 rat multiples all its stats by 1.4 or 4?
     //also how do i make this a .csv file so it looks better
+
+    Monsters.add("Penis");
+   // try (Scanner scanner = new Scanner(new File("book.csv"));) {
+    //while (scanner.hasNextLine()) {
+    //    records.add(getRecordFromLine(scanner.nextLine()));
+    //}
+    
     Creature goblin = new Creature(1, "Goblin", 3, 7);
     Creature rat = new Creature(1,"Rat",1,3);
     Creature skelly = new Creature(1, "Skelly", 2, 5);
