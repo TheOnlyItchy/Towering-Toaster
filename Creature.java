@@ -3,10 +3,11 @@ public class Creature{
     String name;
     int attackPwr;
     int health;
-    public Creature(level, name, attackPwr, health){
+    public Creature(int level,String name,int attackPwr, 
+int health){
         this.level = level;
         this.name = name;
         this.attackPwr = attackPwr;
-        this.health = health
+        this.health = health;
     }
 }

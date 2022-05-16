@@ -10,13 +10,14 @@ class Main {
 
     //makes a list of monsters
     ArrayList<String> Monsters = new ArrayList<>();
-    createMonsters();
+    Monsters.add("Penis");
+    Creature[] epic = createMonsters();
 
     //creates the player
     Player hero = printIntro();
 
     //the dungeon class has a certain amount of rooms along with certain monsters that can appear.
-    Dungeon FloorOne = new Dungeon(5, monsters);
+    Dungeon FloorOne = new Dungeon(5, epic);
 
     
     
@@ -25,7 +26,7 @@ class Main {
     //uncertain how levels for monsters will work. maybe a multiplyer? ex. level 4 rat multiples all its stats by 1.4 or 4?
     //also how do i make this a .csv file so it looks better
 
-    Monsters.add("Penis");
+    
    // try (Scanner scanner = new Scanner(new File("book.csv"));) {
     //while (scanner.hasNextLine()) {
     //    records.add(getRecordFromLine(scanner.nextLine()));
