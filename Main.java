@@ -27,7 +27,7 @@ class Main {
     //also how do i make this a .csv file so it looks better
 
     
-   // try (Scanner scanner = new Scanner(new File("book.csv"));) {
+    // try (Scanner scanner = new Scanner(new File("book.csv"));) {
     //while (scanner.hasNextLine()) {
     //    records.add(getRecordFromLine(scanner.nextLine()));
     //}

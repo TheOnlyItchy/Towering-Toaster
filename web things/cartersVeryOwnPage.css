@@ -1,0 +1,13 @@
+body{
+    background-color: darkkhaki;
+    color: azure;
+    margin: 1in;
+}
+h1{
+    color: blue;
+    background-color: brown;
+}
+
+.special{
+    color: pink;
+}
