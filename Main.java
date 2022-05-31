@@ -1,6 +1,7 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Random;
+
 
 class Main {
   public static final Scanner scn = new Scanner(System.in);
@@ -8,18 +9,34 @@ class Main {
 
   public static void main(String[] args) {
 
+    
+
+    // create EVERYTHING!!!
     // makes a list of monsters
-    ArrayList<String> Monsters = new ArrayList<>();
-    Monsters.add("Penis");
-    Creature[] epic = createMonsters();
+    Creature[] monstersList = createMonsters();
+
+    // Make a list of the dungeon floors
+    Dungeon[] floors = createDungeons();
 
     // creates the player
     Player hero = printIntro();
 
-    // the dungeon class has a certain amount of rooms along with certain monsters
-    // that can appear.
-    Dungeon FloorOne = new Dungeon(5, epic);
+    // BEGIN PLAY
+    while (hero.getHealth() < 0) {
+      
+    }
 
+  }
+
+  private static Dungeon[] createDungeons() {
+    //random number of rooms + treasure room chance
+    Dungeon floorOne = new Dungeon(rand.nextInt(9 - 6) + 6, 25);
+    Dungeon floorTwo = new Dungeon(rand.nextInt(11 - 6) + 6, 10);
+    Dungeon floorThree = new Dungeon(rand.nextInt(12 - 8) + 8, 15);
+
+    Dungeon[] floors = {floorOne,floorTwo,floorThree};
+    System.out.println("Dungeon Created!");
+    return floors;
   }
 
   public static Creature[] createMonsters() {
@@ -27,11 +44,7 @@ class Main {
     // rat multiples all its stats by 1.4 or 4?
     // also how do i make this a .csv file so it looks better
 
-    // try (Scanner scanner = new Scanner(new File("book.csv"));) {
-    // while (scanner.hasNextLine()) {
-    // records.add(getRecordFromLine(scanner.nextLine()));
-    // }
-
+    // floor one monsters
     Creature goblin = new Creature(1, "Goblin", 3, 7);
     Creature rat = new Creature(1, "Rat", 1, 3);
     Creature skelly = new Creature(1, "Skelly", 2, 5);
@@ -39,7 +52,7 @@ class Main {
     Creature slime = new Creature(1, "Slime", 3, 5);
 
     Creature[] monsters = { goblin, rat, skelly, golem, slime };
-
+    System.out.println("Monsters Created!");
     return monsters;
   }
 
@@ -61,11 +74,10 @@ class Main {
         + health + ".\n");
 
     Player hero = new Player(1, name, attackPwr, health);
-
+    System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n");
+    System.out.println("----------------------------------------------------------------------\n");
     return hero;
   }
 
-  public static ArrayList<String> ligma() {
 
-  };
 }
