@@ -4,23 +4,35 @@ public class Dungeon {
 
     private final Random rand = new Random();
     private int rooms;
-    private int treasureRoomChance;
+    private int specialRoomChance;
 
     public Dungeon(int rooms, int treasureRoomChance) {
         this.rooms = rooms;
-        this.treasureRoomChance = treasureRoomChance;
+        this.specialRoomChance = treasureRoomChance;
+    }
+
+    public int getRooms(){
+        return this.rooms;
     }
 
     public int getChance() {
-        return this.treasureRoomChance;
+        return this.specialRoomChance;
     }
 
     public boolean isItTreasureRoom() {
 
-        if (rand.nextInt(100) <= this.treasureRoomChance) {
+        if (rand.nextInt(100) <= this.specialRoomChance) {
             return true;
         } else {
             return false;
         }
     }
+    public boolean isItObstacle(){
+        if (rand.nextInt(100) <= this.specialRoomChance+20) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -1,0 +1,9 @@
+create 3 diffrent encounters
+- Treasure room
+- Choice rooms
+- battle rooms
+Other Things
+- random gen weapons
+- level progresion
+- money
+- populate treasure rooms

@@ -16,14 +16,32 @@ class Main {
     Creature[] monstersList = createMonsters();
 
     // Make a list of the dungeon floors
-    Dungeon[] floors = createDungeons();
+    Dungeon[] floorsList = createDungeons();
 
     // creates the player
     Player hero = printIntro();
+      System.out.println(hero.getHealth());
 
     // BEGIN PLAY
-    while (hero.getHealth() < 0) {
-      
+    while (hero.getHealth() > 0) {
+      //for loop for each floor
+      for(int i = 0; i<floorsList.length; i++){
+        Dungeon currentFloor = floorsList[i];
+        System.out.println("Steping down the stairs, you obseve on your map that this dungeon has "+currentFloor.getRooms()+" rooms.");
+
+        //for loop for each room
+        for(int f = 0; f<currentFloor.getRooms(); f++){
+          //if its a obstacle
+          if (currentFloor.isItObstacle()){
+
+          }
+          //if its a Rreasure Room
+          if(currentFloor.isItTreasureRoom()){
+
+          }
+        }
+      }
+      break;
     }
 
   }
@@ -35,7 +53,7 @@ class Main {
     Dungeon floorThree = new Dungeon(rand.nextInt(12 - 8) + 8, 15);
 
     Dungeon[] floors = {floorOne,floorTwo,floorThree};
-    System.out.println("Dungeon Created!");
+    System.out.println("Dungeon Loaded");
     return floors;
   }
 
@@ -52,7 +70,7 @@ class Main {
     Creature slime = new Creature(1, "Slime", 3, 5);
 
     Creature[] monsters = { goblin, rat, skelly, golem, slime };
-    System.out.println("Monsters Created!");
+    System.out.println("Monsters Loaded");
     return monsters;
   }
 
@@ -75,7 +93,6 @@ class Main {
 
     Player hero = new Player(1, name, attackPwr, health);
     System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n");
-    System.out.println("----------------------------------------------------------------------\n");
     return hero;
   }
 
