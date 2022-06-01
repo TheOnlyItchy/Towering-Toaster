@@ -21,21 +21,31 @@ class Main {
     // creates the player
     Player hero = printIntro();
       System.out.println(hero.getHealth());
-
-    // BEGIN PLAY
+      
+      while(true){
+        new Obstacle(hero);
+      }
+    /* BEGIN PLAY
     while (hero.getHealth() > 0) {
       //for loop for each floor
       for(int i = 0; i<floorsList.length; i++){
         Dungeon currentFloor = floorsList[i];
         System.out.println("Steping down the stairs, you obseve on your map that this dungeon has "+currentFloor.getRooms()+" rooms.");
 
+          
+
+
+
+
+
+
         //for loop for each room
         for(int f = 0; f<currentFloor.getRooms(); f++){
           //if its a obstacle
           if (currentFloor.isItObstacle()){
-            new Obstacle();
+            new Obstacle(hero);
           }
-          //if its a Rreasure Room
+          //if its a Treasure Room
           if(currentFloor.isItTreasureRoom()){
 
           }
@@ -43,7 +53,7 @@ class Main {
       }
       break;
     }
-
+    */
   }
 
   private static Dungeon[] createDungeons() {
@@ -91,7 +101,7 @@ class Main {
     System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + " and a HEALTH of "
         + health + ".\n");
 
-    Player hero = new Player(1, name, attackPwr, health,0);
+    Player hero = new Player(1, name, attackPwr, health,100);
     System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n");
     return hero;
   }

@@ -5,5 +5,5 @@ create 3 diffrent encounters
 Other Things
 - random gen weapons
 - level progresion (maybe not this one)
-- money
+- money ==DONE==
 - populate treasure rooms
