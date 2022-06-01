@@ -20,7 +20,7 @@ class Main {
 
     // creates the player
     Player hero = printIntro();
-      System.out.println(hero.getHealth());
+      
       
       while(true){
         new Obstacle(hero);

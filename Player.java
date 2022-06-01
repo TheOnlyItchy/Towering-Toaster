@@ -4,6 +4,7 @@ public class Player extends Creature{
     private int attackPwr;
     private int health;
     private int money;
+    private int maxHealth;
     public Player(int level,String name, int attackPwr,int health, int money){
         
         super(level, name, attackPwr, health);
@@ -12,6 +13,7 @@ public class Player extends Creature{
         this.attackPwr = attackPwr;
         this.health = health;
         this.money = money;
+        maxHealth = health;
     }
     public void changeMoney(int gains, boolean affect){
         if(!affect){
@@ -32,6 +34,16 @@ public class Player extends Creature{
     }
     public int getMoney() {
         return money;
+    }
+    public void heal(int healings) {
+        if(healings+health >= maxHealth){
+            health = maxHealth;
+            System.out.println("You heal to full heath! (HP:"+health+")");
+        }
+        else{
+            health+=healings;
+            System.out.println("You heal "+healings+" HP! (HP:"+health+")");
+        }
     }
     
   

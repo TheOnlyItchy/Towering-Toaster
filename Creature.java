@@ -15,5 +15,6 @@ int health){
     }
     public void takeDamage(int damage){
         health =- damage;
+        System.out.println("You take -"+damage+" DMG! (HP:"+health+")");
     }
 }
