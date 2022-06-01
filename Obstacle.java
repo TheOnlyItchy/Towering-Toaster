@@ -12,11 +12,11 @@ public class Obstacle {
         this.hero = hero;
         Random rand = new Random();
 
-        //Random 10 events that can happen
-        int event = new Random().nextInt(6);
+        //Random 10 events that can happen (Currently 5)
+        int event = rand.nextInt(6);
         System.out.println(event);
         //0 = good outcome; 1 = bad outcome
-        int correct = new Random().nextInt(2);
+        int correct = rand.nextInt(2);
         System.out.println(correct);
         switch(event){
             case 0: //Creepy Chest

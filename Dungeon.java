@@ -5,10 +5,14 @@ public class Dungeon {
     private final Random rand = new Random();
     private int rooms;
     private int specialRoomChance;
+    private int minLevel;
+    private int maxLevel;
 
-    public Dungeon(int rooms, int treasureRoomChance) {
+    public Dungeon(int rooms, int treasureRoomChance, int minLevel, int maxLevel ){
         this.rooms = rooms;
         this.specialRoomChance = treasureRoomChance;
+        this.minLevel = minLevel;
+        this.maxLevel = maxLevel;
     }
 
     public int getRooms(){
@@ -33,6 +37,12 @@ public class Dungeon {
         } else {
             return false;
         }
+    }
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+    public int getMinLevel() {
+        return minLevel;
     }
 
 }

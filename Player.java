@@ -5,15 +5,17 @@ public class Player extends Creature{
     private int health;
     private int money;
     private int maxHealth;
-    public Player(int level,String name, int attackPwr,int health, int money){
+    private Weapon weapon;
+    public Player(int level,String name, int attackPwr,int health, int money,Weapon weapon){
         
-        super(level, name, attackPwr, health);
+        super(level, name, attackPwr, health, weapon);
         this.level = level;
         this.name = name;
         this.attackPwr = attackPwr;
         this.health = health;
         this.money = money;
         maxHealth = health;
+        this.weapon = weapon;
     }
     public void changeMoney(int gains, boolean affect){
         if(!affect){
