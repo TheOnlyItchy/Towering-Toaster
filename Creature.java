@@ -10,4 +10,7 @@ int health){
         this.attackPwr = attackPwr;
         this.health = health;
     }
+    public int getHealth(){
+        return this.health;
+    }
 }

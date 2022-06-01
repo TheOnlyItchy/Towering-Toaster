@@ -4,6 +4,6 @@ create 3 diffrent encounters
 - battle rooms
 Other Things
 - random gen weapons
-- level progresion
+- level progresion (maybe not this one)
 - money
 - populate treasure rooms

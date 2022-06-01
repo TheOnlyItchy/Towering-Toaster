@@ -1,6 +1,6 @@
-import java.util.Scanner;
 //import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 
 class Main {
@@ -33,7 +33,7 @@ class Main {
         for(int f = 0; f<currentFloor.getRooms(); f++){
           //if its a obstacle
           if (currentFloor.isItObstacle()){
-
+            new Obstacle();
           }
           //if its a Rreasure Room
           if(currentFloor.isItTreasureRoom()){
@@ -91,7 +91,7 @@ class Main {
     System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + " and a HEALTH of "
         + health + ".\n");
 
-    Player hero = new Player(1, name, attackPwr, health);
+    Player hero = new Player(1, name, attackPwr, health,0);
     System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n");
     return hero;
   }
