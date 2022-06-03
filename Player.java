@@ -47,7 +47,9 @@ public class Player extends Creature{
             System.out.println("You heal "+healings+" HP! (HP:"+health+")");
         }
     }
-    
+    public Weapon getWeapon(){
+        return weapon;
+    }
   
     
 }

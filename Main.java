@@ -25,6 +25,7 @@ class Main {
       
     while (true){
       createWeapon(minMax);
+      
       scn.next();
     }
       

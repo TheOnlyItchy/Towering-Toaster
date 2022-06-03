@@ -25,14 +25,14 @@ public class Dungeon {
 
     public boolean isItTreasureRoom() {
 
-        if (rand.nextInt(100) <= this.specialRoomChance) {
+        if (rand.nextInt(100) <= specialRoomChance) {
             return true;
         } else {
             return false;
         }
     }
     public boolean isItObstacle(){
-        if (rand.nextInt(100) <= this.specialRoomChance+20) {
+        if (rand.nextInt(100) <= specialRoomChance+20) {
             return true;
         } else {
             return false;
