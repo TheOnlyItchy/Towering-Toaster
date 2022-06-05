@@ -6,9 +6,9 @@ public class Player extends Creature{
     private int money;
     private int maxHealth;
     private Weapon weapon;
-    public Player(int level,String name, int attackPwr,int health, int money,Weapon weapon){
+    public Player(int level,String name,int health, int money,Weapon weapon){
         
-        super(level, name, attackPwr, health, weapon);
+        super(level, name, 0, health, weapon);
         this.level = level;
         this.name = name;
         this.attackPwr = attackPwr;
@@ -47,9 +47,15 @@ public class Player extends Creature{
             System.out.println("You heal "+healings+" HP! (HP:"+health+")");
         }
     }
-    public Weapon getWeapon(){
-        return weapon;
+    public void listStats() {
+        System.out.println("---"+name+"---");
+        System.out.println("Weapon: "+weapon);
+        System.out.println("Level: "+level);
+        System.out.println("Money: "+money);
+        System.out.println("------------");
+        
     }
+    
   
     
 }

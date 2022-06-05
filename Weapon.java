@@ -1,3 +1,4 @@
+import java.lang.System.Logger.Level;
 import java.util.Random;
 
 public class Weapon {
@@ -10,12 +11,14 @@ public class Weapon {
     int dmgMax;
     int block;
     int crit;
+    boolean whoIsIt;
 
-    public Weapon(int lvl, String name,int type){
+    public Weapon(int lvl, String name,int type, boolean whoIsIt){
 
         this.lvl = lvl;
         this.name = name;
         this.type = type;
+        this.whoIsIt = whoIsIt;
 
         //figures out what type it is and depending on that changes
         //the damage, block, and crit chance
@@ -23,17 +26,17 @@ public class Weapon {
             case 0: //Sword medium damage, medium block, medium crit chance
                 dmgMin = 3*lvl;
                 dmgMax = 5*lvl;
-                crit = 3*lvl;
+                crit = 20;
                 block = 3*lvl;
                 break;
             case 1: //Hammer high damage, High block, low crit chance
-                dmgMin = 4*lvl;
-                dmgMax = 7*lvl;
+                dmgMin = 5*lvl;
+                dmgMax = 9*lvl;
                 crit = 10;
                 block = 5*lvl;
                 break;
             case 2: //Spear low to high damage, low block, high crit chance
-                dmgMin = 3*lvl;
+                dmgMin = 2*lvl;
                 dmgMax = 7*lvl;
                 crit = 30;
                 block = 2*lvl;
@@ -43,16 +46,7 @@ public class Weapon {
 
         //0:blades 1:bludgeon 2:Spears
     }  
-    public int getDmg(){
-        int baseDmg = rand.nextInt(dmgMax - dmgMin) + dmgMin;
-        if(isCrit()){
-            System.out.println("CRITICAL STRIKE X3 DAMAGE!!!");
-            return baseDmg * 3;
-        }
-        else{
-        return baseDmg;
-        }
-    }
+    
     public boolean isCrit(){
         if(rand.nextInt(100) <= crit){
             return true;
@@ -60,6 +54,24 @@ public class Weapon {
         else{
             return false;
         }
+    }
+    public void listStats() {
+        System.out.println("---"+name+"---");
+        System.out.println("Attack: "+dmgMin+" - "+dmgMax);
+        System.out.println("Block: "+block);
+        System.out.println("Level: "+lvl);
+        System.out.println("Crit: "+crit+"%");
+        System.out.println("------------");
+        
+    }
+    public int getDmg(){
+        return rand.nextInt((dmgMax+1) - dmgMin) + dmgMin;
+    }
+    public boolean getWhoIsit(){
+        return whoIsIt;
+    }
+    public String getName() {
+        return name;
     }
 
     
