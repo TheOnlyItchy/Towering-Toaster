@@ -13,11 +13,9 @@ public class Obstacle {
         Random rand = new Random();
 
         //Random 10 events that can happen (Currently 5)
-        int event = rand.nextInt(6);
-        System.out.println(event);
+        int event = rand.nextInt(5);
         //0 = good outcome; 1 = bad outcome
         int correct = rand.nextInt(2);
-        System.out.println(correct);
         switch(event){
             case 0: //Creepy Chest
                 System.out.println("Wandering into the next room, you shift your gaze to the vine covered room. In the center on a pedestal sits a small erie chest\nDo you wish to open it? (Y/N)");

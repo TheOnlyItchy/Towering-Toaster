@@ -19,7 +19,7 @@ class Main {
      int lvl[] = {floorsList[0].getMinLevel(),floorsList[0].getMaxLevel()};
     
     // makes a list of monsters
-   // Creature[] monstersList = createMonsters(lvl);
+    Creature monstersList[] = createMonsters(lvl);
 
     // creates the player
     Player hero = printIntro();
@@ -34,20 +34,21 @@ class Main {
       
     }
     */
-    
+    //=============================================//
      //BEGIN PLAY
     while (hero.getHealth() > 0) {
       //for loop for each floor
       for(int i = 0; i<floorsList.length; i++){
         Dungeon currentFloor = floorsList[i];
-        System.out.println("Steping down the stairs, you obseve on your map that this dungeon has "+currentFloor.getRooms()+" rooms.");
+        System.out.println("Steping down the stairs, you obseve on your map that this dungeon has "+currentFloor.getRooms()+" rooms.\n(Enter anything to continue)");
+        scn.next();
 
         
 
 
 
 
-
+        
         
         //for loop for each room
         for(int f = 0; f<currentFloor.getRooms(); f++){
@@ -56,13 +57,20 @@ class Main {
             new Obstacle(hero);
           }
           //if its a Treasure Room
-          if(currentFloor.isItTreasureRoom()){
-
+          else if(currentFloor.isItTreasureRoom()){
+            System.out.println("Its a treasure room!");
+            
+          }
+          //if not, then its a battle
+          else{
+            Battle battle = new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
           }
         }
       }
       break;
     }
+    //END PLAY
+    //=============================================//
     
   }
 
@@ -76,7 +84,6 @@ class Main {
     
     return floors;
   }
-  /* 
   public static Creature[] createMonsters(int[] lvl) {
     // uncertain how levels for monsters will work. maybe a multiplyer? ex. level 4
     // rat multiples all its stats by 1.4 or 4?
@@ -93,7 +100,6 @@ class Main {
     
     return monsters;
   }
-  */
 
   public static Player printIntro() {
     System.out.println("-_-_-_-_-_-_-_-_-");
@@ -108,14 +114,16 @@ class Main {
     // random starting health between 8-12
     int health = rand.nextInt(21 - 15) + 15;
     int attackPwr = rand.nextInt(4 - 2) + 2;
+    int startingWeaponLevel[] = {1,2};
+    Player hero = new Player(1, name, health,10,createWeapon(startingWeaponLevel, true));
 
-    System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + ", HEALTH of "+ health + ", and is equiped with a \n");
+    System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + ", HEALTH of "+ health + ", and is equiped with a "+hero.getWeapon().getName()+"\n");
 
     
 
-    int startingWeaponLevel[] = {1,2};
-    Player hero = new Player(1, name, health,10,createWeapon(startingWeaponLevel, true));
-    System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n");
+    
+    System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n(Enter anything to continue)");
+    scn.next();
 
     
 

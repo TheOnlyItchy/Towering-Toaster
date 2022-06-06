@@ -52,4 +52,10 @@ public class Creature{
         System.out.println("------------");
         
     }
+    public int getLevel() {
+        return level;
+    }
+    public void changeLevel(int newLevel){
+        newLevel = level;
+    }
 }

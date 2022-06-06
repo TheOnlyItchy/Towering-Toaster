@@ -44,5 +44,8 @@ public class Dungeon {
     public int getMinLevel() {
         return minLevel;
     }
+    public int getRandomLevel(){
+        return rand.nextInt(maxLevel - minLevel) + minLevel;
+    }
 
 }
