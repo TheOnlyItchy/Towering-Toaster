@@ -1,1 +1,2 @@
-run="sh main.sh"
+run     = "rm *.class; javac *.java; java Main;"
+laguage = "java"

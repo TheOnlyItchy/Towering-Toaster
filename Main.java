@@ -23,7 +23,7 @@ class Main {
 
     // creates the player
     Player hero = printIntro();
-    hero.gainXp(110);
+    
 
     /*
     Creature test = new Creature(1, "test", 5, 5,createWeapon(lvl, true));
@@ -43,6 +43,7 @@ class Main {
         Dungeon currentFloor = floorsList[i];
         System.out.println("Steping down the stairs, you obseve on your map that this dungeon has "+currentFloor.getRooms()+" rooms.\n(Enter anything to continue)");
         scn.next();
+        System.out.println();
 
         
 
@@ -125,6 +126,7 @@ class Main {
     
     System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n(Enter anything to continue)");
     scn.next();
+    System.out.println();
 
     
 

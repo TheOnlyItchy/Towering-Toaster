@@ -60,7 +60,8 @@ public class Player extends Creature{
         System.out.println("------------");
         
     }
-    public void gainXp(int gains){
+    public void gainXp(){
+      int gains = rand.nextInt(51 - 10) + 10;
         if(xp+gains>=xpLimit){
             System.out.println("You gained "+(xp+gains)+"XP!");
             levelUp();
@@ -77,8 +78,10 @@ public class Player extends Creature{
         int addMaxHealth = level*rand.nextInt(11 - 6) + 6;
         System.out.println("===LEVEL UP!===");
         System.out.println("LVL." + (level - 1) + " to LVL."+level);
-        System.out.println("MAX HP: " +health  + " to MAX HP:"+(health+addMaxHealth));
+        System.out.println("MAX HP " +health  + " to "+(health+addMaxHealth));
         System.out.println("You heal "+10*level+"HP");
+      System.out.println("================");
+      
         health+=addMaxHealth;
     }
   

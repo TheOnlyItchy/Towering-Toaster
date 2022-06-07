@@ -23,6 +23,10 @@ public class Creature{
         health =- damage;
         System.out.println("You take -"+damage+" DMG! (HP:"+health+")");
     }
+  public void takeDamageNoTxt(int damage){
+        health =- damage;
+        System.out.println("You take -"+damage+" DMG! (HP:"+health+")");
+    }
 
     public void heal(int healing){
         health =+ healing;

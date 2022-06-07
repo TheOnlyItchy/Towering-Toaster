@@ -16,16 +16,22 @@ public class Battle {
         enemy.changeLevel(floor.getRandomLevel());
 
         //=======================//
-        System.out.println("Wandering into the next room, you spot a LVL."+enemy.getLevel()+" "+enemy.name+"!\n");
+        System.out.println("Wandering into the next room, you spot a LVL."+enemy.getLevel()+" "+enemy.name+" weilding a "+enemy.getWeapon().getName()+"!\n");
 
         while(hero.getHealth()>0||enemy.getHealth()>0){
 
         int playerChoice = choiceMenu();
         int enemyChoice = rand.nextInt(3);
+        System.out.println();
         clash(playerChoice, enemyChoice);
+        }
+        if(enemy.getHealth()>0){
+          System.out.println("You felled the "+enemy.getLevel()+" "+enemy.name);
+          hero.gainXp();
         }
     }
     public int choiceMenu(){
+      System.out.println();
         System.out.println("What will you do!");
         System.out.println("==========");
         System.out.println("0) Attack");
@@ -33,8 +39,10 @@ public class Battle {
         System.out.println("2) Grab");
         System.out.println("==========");
         return scn.nextInt();
+        
     }
     public void clash(int pChoice,int eChoice){
+        //==========SUCCESSFUL==========
         //Successful Attack
         if(pChoice == 0 && eChoice == 2){
             int damage = hero.attackDmg();
@@ -52,6 +60,28 @@ public class Battle {
             int damage = hero.grabDmg();
             System.out.println("As the "+enemy.getName()+" preemptively tries to block, you leap forward grabing them, throwing them at the wall with all your strength dealing "+damage+" DMG!");
             enemy.takeDamage(damage);
+        }
+        //==========UNSUCCESSFUL==========
+        //Unsuccessful Attack
+        else if(pChoice == 2 && eChoice == 0){
+            int damage = enemy.attackDmg();
+            System.out.println("As the "+enemy.getName()+" goes to swing at you you, you attempt to grab them failing as you get cut taking "+damage+" DMG! (HP: "+(hero.getHealth()-damage)+")");
+            hero.takeDamage(damage);
+        }
+        //Unsuccessful Block
+        else if(pChoice == 0 && eChoice == 1){
+            int damage = enemy.blockDmg();
+            System.out.println("As the "+enemy.getName()+" raises there "+enemy.getWeapon().getName()+", you swing your "+hero.getWeapon().getName()+", however your stirke isnt strong enough and you bounch back taking "+damage+" DMG! (HP: "+(hero.getHealth()-damage)+")");
+            hero.takeDamage(damage);
+        }
+        //Unsuccessful Grab
+        else if(pChoice == 1 && eChoice == 2){
+            int damage = enemy.grabDmg();
+            System.out.println("As the "+enemy.getName()+" goes to grab you, you raise your "+hero.getWeapon().getName()+" in attempts to block, however they still grab you throwing you agenst the wall taking "+damage+" DMG! (HP: "+(hero.getHealth()-damage)+")");
+            hero.takeDamage(damage);
+        }
+        else{
+          System.out.println("You both attempt the same move and akwardly bounce off eachother!");
         }
     }
 }
