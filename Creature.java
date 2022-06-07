@@ -58,4 +58,7 @@ public class Creature{
     public void changeLevel(int newLevel){
         newLevel = level;
     }
+    public String getName() {
+        return name;
+    }
 }

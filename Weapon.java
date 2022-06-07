@@ -45,7 +45,7 @@ public class Weapon {
         
 
         //0:blades 1:bludgeon 2:Spears
-    }  
+    }   
     
     public boolean isCrit(){
         if(rand.nextInt(100) <= crit){

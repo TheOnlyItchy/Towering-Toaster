@@ -34,17 +34,17 @@ public class Battle {
         System.out.println("==========");
         return scn.nextInt();
     }
-    public void clash(int player,int enemy){
+    public void clash(int pChoice,int eChoice){
         //Successful Attack
-        if(player == 0 && enemy == 2){
+        if(pChoice == 0 && eChoice == 2){
             System.out.println("As the "+enemy.getName()+" goes to grab you, you quickly counter it with a slash!")
         }
         //Successful Block
-        if(player == 1 && enemy == 0){
+        if(pChoice == 1 && eChoice == 0){
 
         }
         //Successful Grab
-        if(player == 2 && enemy == 1){
+        if(pChoice == 2 && eChoice == 1){
 
         }
     }
