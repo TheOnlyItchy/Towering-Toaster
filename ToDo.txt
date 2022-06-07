@@ -1,9 +1,10 @@
 create 3 diffrent encounters
 - Treasure room
 - Choice rooms ==1/2 DONE==
-- battle rooms
+- battle rooms ===DONE===
 Other Things
-- random gen weapons
-- level progresion (maybe not this one)
+- random gen weapons ===DONE===
+- level progresion (maybe not this one) ===DONE===
 - money ==DONE==
 - populate treasure rooms
+- fix the health, doesnt work?

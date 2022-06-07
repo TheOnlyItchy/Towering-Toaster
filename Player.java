@@ -13,7 +13,7 @@ public class Player extends Creature{
     private Random rand = new Random();
     public Player(int level,String name,int health, int money,Weapon weapon){
         
-        super(level, name, 0, health, weapon);
+        super(level,name,0,health,weapon);
         this.level = level;
         this.name = name;
         this.attackPwr = attackPwr;

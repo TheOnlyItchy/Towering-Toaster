@@ -54,7 +54,7 @@ public class Obstacle {
                 }
                 break;
             case 2: // Strange Bottles
-                System.out.println("Wandering into the next room, you notice how nicely furnished it is, of course it could do with some dusting, but still very homey. Laying over the piano in the corner of the room is a skelton grasping a liquor bottle. Its contents look brown and mushy, but dispite its appernce it doesnt smell half bad!/nDo you want to take a swig? (Y/N)");
+                System.out.println("Wandering into the next room, you notice how nicely furnished it is, of course it could do with some dusting, but still very homey. Laying over the piano in the corner of the room is a skelton grasping a liquor bottle. Its contents look brown and mushy, but dispite its appernce it doesnt smell half bad!\nDo you want to take a swig? (Y/N)");
                 if(scn.next().toUpperCase().equals("Y")){
                     if(correct == 0){
                         System.out.println("With your strong hands you break the bones fused to the bottle, you drink the entire contents. Even with its odd apperence and consistency, it tastes amazing!");
@@ -71,7 +71,7 @@ public class Obstacle {
                 }
                 break;
             case 3: //Bouncy Bed
-                System.out.println("Wandering into the next room, you find it completly empty all except for a bed with a mattress, you walk over and sit on it. it's very bouncy!/nDo you want to jump on the bed? (Y/N)");
+                System.out.println("Wandering into the next room, you find it completly empty all except for a bed with a mattress, you walk over and sit on it. it's very bouncy!\nDo you want to jump on the bed? (Y/N)");
                 if(scn.next().toUpperCase().equals("Y")){
                     if(correct == 0){
                         System.out.println("With your beefy legs you start jumping on the bed, you continue to jump on it for a concering ammount of time. without knowing how long you've been bouncing, you decide you've had enough. As you dismount the bed you notice the mattress is completely destroyed, but you find underneath it a few coins!");
@@ -83,7 +83,7 @@ public class Obstacle {
                     }
                 }
                 else{
-                    System.out.println("You remember a old proverb about monkeys jumping on a bed remember what happen to them, you decide its not the bed idea to bounce on it. you walk to the door and leave to the next room");
+                    System.out.println("You remember a old proverb about monkeys jumping on a bed remember what happen to them, you decide its not the best idea to bounce on it. you walk to the door and leave to the next room");
                     
                 }
                 break;

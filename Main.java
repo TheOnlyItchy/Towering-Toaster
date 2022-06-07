@@ -57,6 +57,8 @@ class Main {
           //if its a obstacle
           if (currentFloor.isItObstacle()){
             new Obstacle(hero);
+            System.out.println("(Enter anything to continue)");
+              scn.next();
           }
           //if its a Treasure Room
           else if(currentFloor.isItTreasureRoom()){
@@ -66,6 +68,8 @@ class Main {
           //if not, then its a battle
           else{
             Battle battle = new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
+            System.out.println("(Enter anything to continue)");
+              scn.next();
           }
         }
       }

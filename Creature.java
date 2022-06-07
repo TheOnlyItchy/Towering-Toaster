@@ -16,7 +16,7 @@ public class Creature{
     }
 
     public int getHealth(){
-        return this.health;
+        return health;
     }
 
     public void takeDamage(int damage){
@@ -25,7 +25,7 @@ public class Creature{
     }
   public void takeDamageNoTxt(int damage){
         health =- damage;
-        System.out.println("You take -"+damage+" DMG! (HP:"+health+")");
+        
     }
 
     public void heal(int healing){
