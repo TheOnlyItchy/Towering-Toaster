@@ -1,4 +1,4 @@
-import java.lang.System.Logger.Level;
+
 import java.util.Random;
 
 public class Weapon {
@@ -73,6 +73,10 @@ public class Weapon {
     public String getName() {
         return name;
     }
+    public int getBlock() {
+        return block;
+    }
+    
 
     
    

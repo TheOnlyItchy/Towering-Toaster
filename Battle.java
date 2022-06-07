@@ -37,15 +37,21 @@ public class Battle {
     public void clash(int pChoice,int eChoice){
         //Successful Attack
         if(pChoice == 0 && eChoice == 2){
-            System.out.println("As the "+enemy.getName()+" goes to grab you, you quickly counter it with a slash!")
+            int damage = hero.attackDmg();
+            System.out.println("As the "+enemy.getName()+" goes to grab you, you quickly counter it with your "+hero.getWeapon().getName()+" dealing "+damage+" DMG!");
+            enemy.takeDamage(damage);
         }
         //Successful Block
-        if(pChoice == 1 && eChoice == 0){
-
+        else if(pChoice == 1 && eChoice == 0){
+            int damage = hero.blockDmg();
+            System.out.println("As the "+enemy.getName()+" goes to swing at you, you raise your "+hero.getWeapon().getName()+" blocking there attempt dealing "+damage+" DMG!");
+            enemy.takeDamage(damage);
         }
         //Successful Grab
-        if(pChoice == 2 && eChoice == 1){
-
+        else if(pChoice == 2 && eChoice == 1){
+            int damage = hero.grabDmg();
+            System.out.println("As the "+enemy.getName()+" preemptively tries to block, you leap forward grabing them, throwing them at the wall with all your strength dealing "+damage+" DMG!");
+            enemy.takeDamage(damage);
         }
     }
 }

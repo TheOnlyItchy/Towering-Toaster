@@ -23,6 +23,7 @@ class Main {
 
     // creates the player
     Player hero = printIntro();
+    hero.gainXp(110);
 
     /*
     Creature test = new Creature(1, "test", 5, 5,createWeapon(lvl, true));
@@ -111,8 +112,8 @@ class Main {
 
     System.out.println("\nA worthy name indeed! \n");
 
-    // random starting health between 8-12
-    int health = rand.nextInt(21 - 15) + 15;
+    // random starting health between 40-35
+    int health = rand.nextInt(41 - 35) + 35;
     int attackPwr = rand.nextInt(4 - 2) + 2;
     int startingWeaponLevel[] = {1,2};
     Player hero = new Player(1, name, health,10,createWeapon(startingWeaponLevel, true));

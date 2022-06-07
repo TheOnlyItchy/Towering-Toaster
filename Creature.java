@@ -32,13 +32,25 @@ public class Creature{
     public int attackDmg(){
         int baseDmg = weapon.getDmg();
         if(weapon.isCrit() && weapon.whoIsIt){
-            System.out.println("You Swing your "+weapon.getName()+" and get a CRITICAL STRIKE dealing "+baseDmg*3);
+            System.out.println("CRITICAL STRIKE!");
             return baseDmg * 3;
         }
         else{
-            System.out.println("You Swing your "+weapon.getName()+" and deal "+baseDmg);
-        return baseDmg;
+            return baseDmg;
         }
+    }
+    public int blockDmg(){
+        int baseDmg = weapon.getBlock();
+        if(weapon.isCrit() && weapon.whoIsIt){
+            System.out.println("CRITICAL STRIKE!");
+            return baseDmg * 3;
+        }
+        else{
+            return baseDmg;
+        }
+    }
+    public int grabDmg(){
+            return 10*getLevel();
     }
 
     public Weapon getWeapon(){

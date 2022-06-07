@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Player extends Creature{
     private int level;
     private String name;
@@ -6,6 +8,9 @@ public class Player extends Creature{
     private int money;
     private int maxHealth;
     private Weapon weapon;
+    private int xpLimit = 100;
+    private int xp;
+    private Random rand = new Random();
     public Player(int level,String name,int health, int money,Weapon weapon){
         
         super(level, name, 0, health, weapon);
@@ -55,7 +60,27 @@ public class Player extends Creature{
         System.out.println("------------");
         
     }
-    
+    public void gainXp(int gains){
+        if(xp+gains>=xpLimit){
+            System.out.println("You gained "+(xp+gains)+"XP!");
+            levelUp();
+            xp = xp+gains-xpLimit;
+        }
+        else{
+            xp+=gains;
+            System.out.println("You gained "+xp+"XP!");
+            
+        }
+    }
+    public void levelUp(){
+        level+=1;
+        int addMaxHealth = level*rand.nextInt(11 - 6) + 6;
+        System.out.println("===LEVEL UP!===");
+        System.out.println("LVL." + (level - 1) + " to LVL."+level);
+        System.out.println("MAX HP: " +health  + " to MAX HP:"+(health+addMaxHealth));
+        System.out.println("You heal "+10*level+"HP");
+        health+=addMaxHealth;
+    }
   
     
 }
