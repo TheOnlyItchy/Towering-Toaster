@@ -7,12 +7,14 @@ public class Dungeon {
     private int specialRoomChance;
     private int minLevel;
     private int maxLevel;
+    private int floor;
 
-    public Dungeon(int rooms, int treasureRoomChance, int minLevel, int maxLevel ){
+    public Dungeon(int rooms, int treasureRoomChance, int minLevel, int maxLevel, int floor ){
         this.rooms = rooms;
         this.specialRoomChance = treasureRoomChance;
         this.minLevel = minLevel;
         this.maxLevel = maxLevel;
+        this.floor = floor;
     }
 
     public int getRooms(){
@@ -45,7 +47,10 @@ public class Dungeon {
         return minLevel;
     }
     public int getRandomLevel(){
-        return rand.nextInt(maxLevel - minLevel) + minLevel;
+        return rand.nextInt(maxLevel+1 - minLevel) + minLevel;
+    }
+    public int getFloor() {
+        return floor;
     }
 
 }

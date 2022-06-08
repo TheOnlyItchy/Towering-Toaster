@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.PrintStream;
 
 public class Player extends Creature{
 
@@ -14,7 +15,7 @@ public class Player extends Creature{
     private int campFire = 3;
     private Random rand = new Random();
 
-    public Player(int level,String name,int health, int money,Weapon weapon){
+    public Player(int level,String name,int health, int money,Weapon weapon,PrintStream printStream){
         
         super(level,name,0,health,weapon);
         this.level = level;
@@ -74,8 +75,8 @@ public class Player extends Creature{
             xp = xp+gains-xpLimit;
         }
         else{
-            xp+=gains;
-            System.out.println("You gained "+xp+"XP!");
+            xp += gains;
+            System.out.println("You gained "+gains+"XP!");
             
         }
     }

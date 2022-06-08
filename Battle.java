@@ -16,25 +16,22 @@ public class Battle {
         enemy.changeLevel(floor.getRandomLevel());
 
         //=======================//
-        System.out.print("Wandering into the next room, you spot a LVL."+enemy.getLevel()+" "+enemy.name+" weilding a "+enemy.getWeapon().getName()+"!\n");
+        System.out.print("Wandering into the next room, you spot a LVL."+enemy.getLevel()+" "+enemy.name+" weilding a LVL."+enemy.getWeapon().getLvl()+" "+enemy.getWeapon().getName()+"!\n");
       
         //Begin the battle
-        while(hero.getHealth()>0||enemy.getHealth()>0){
+        while(hero.getHealth()>0 && enemy.getHealth()>0){
 
         int playerChoice = choiceMenu();
         int enemyChoice = rand.nextInt(3);
         System.out.println();
-        if(hero.getHealth()>0||enemy.getHealth()>0){}
         clash(playerChoice, enemyChoice);
         }
         //end the battle
       
         //Conclusion and outcome
         if(enemy.getHealth()<0){
-          System.out.println("You felled the "+enemy.getLevel()+" "+enemy.name);
+          System.out.println("You felled the LVL."+enemy.getLevel()+" "+enemy.name);
           hero.gainXp();
-          System.out.println("(Enter anything to continue)");
-          scn.next();
         }
     }
     public int choiceMenu(){

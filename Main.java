@@ -1,49 +1,44 @@
 //import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 
 class Main {
-  public static final Scanner scn = new Scanner(System.in);
   public static final Random rand = new Random();
 
-  public static void main(String[] args) {
+  public static void main(String[] args)throws FileNotFoundException{
 
     
 
     // create EVERYTHING!!!
+    Scanner scn = new Scanner(System.in);
+    Scanner fileScn = new Scanner("Records.txt");
+    File records = new File("Records.txt");
+    File saveGame = new File("saveGame.txt");
+    PrintStream recordStream = new PrintStream(records);
 
-     // Make a list of the dungeon floors
-     Dungeon[] floorsList = createDungeons();
+    mainMenu(scn, fileScn);
+    // Make a list of the dungeon floors
+    Dungeon[] floorsList = createDungeons();
      
-    
-
     // creates the player
-    Player hero = printIntro();
+    Player hero = printIntro(scn,recordStream);
     
-    
-
-    /*
-    Creature test = new Creature(1, "test", 5, 5,createWeapon(lvl, true));
-    test.getWeapon().listStats();
-    for(int i = 0; i<10; i++){
-      test.attackDmg();
-      
-      
-      
-    }
-    */
     //=============================================//
      //BEGIN PLAY
     while (hero.getHealth() > 0) {
       //for loop for each floor
-      for(int i = 0; i<floorsList.length; i++){
+      for(int i = 0; i<=floorsList.length; i++){
 
         hero.resetCampfire();
         Dungeon currentFloor = floorsList[i];
 
         //prints intro for floor
-        System.out.println("Steping down the stairs, you obseve on your map that this dungeon has "+currentFloor.getRooms()+" rooms.\n(Enter anything to continue)");
+        System.out.println("Steping down the stairs, you obseve on your map that this floor has "+currentFloor.getRooms()+" rooms.\n(Enter anything to continue)");
         scn.next();
         System.out.println();
 
@@ -51,7 +46,7 @@ class Main {
         int lvl[] = {floorsList[i].getMinLevel(),floorsList[i].getMaxLevel()};
     
         // makes a list of monsters
-        Creature monstersList[] = createMonsters(lvl);
+        Creature monstersList[] = createMonsters(currentFloor.getRandomLevel());
 
         
 
@@ -61,7 +56,7 @@ class Main {
         
         
         //for loop for each room
-        for(int f = 0; f<currentFloor.getRooms(); f++){
+        for(int f = 0; f<=currentFloor.getRooms(); f++){
 
           //choice menu
           whatWillYouDo(hero);
@@ -74,34 +69,36 @@ class Main {
             boss.changeLevel(lvl[1]*2);
             Battle battle = new Battle(hero, boss, currentFloor);
           }
-
-          //if its a obstacle
-          else if (currentFloor.isItObstacle()){
-            new Obstacle(hero);
-            System.out.println("(Enter anything to continue)");
-              scn.next();
-          }
-
-          //if its a Treasure Room
-          else if(currentFloor.isItTreasureRoom()){
-            treasureRoom(lvl, hero);
-            System.out.println("(Enter anything to continue)");
-            scn.next();
-            
-          }
-
-          //if not, then its a battle
           else{
-            Battle battle = new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
-            System.out.println("(Enter anything to continue)");
+
+            //if its a obstacle
+            if (currentFloor.isItObstacle()){
+              new Obstacle(hero);
+              System.out.println("(Enter anything to continue)");
+                scn.next();
+            }
+
+            //if its a Treasure Room
+            else if(currentFloor.isItTreasureRoom()){
+              treasureRoom(currentFloor.getRandomLevel(), hero,scn);
+              System.out.println("(Enter anything to continue)");
               scn.next();
+              
+            }
+          
+            //if not, then its a battle
+            else{
+              Battle battle = new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
+              System.out.println("(Enter anything to continue)");
+                scn.next();
+            }
           }
 
           //Condition, you died!
           if(hero.getHealth() <= 0){
             System.out.println("You fall to the ground as your health falls to zero...\n===GAME OVER===");
             System.out.println("===Final Stats=== ");
-            System.out.println("Floors Reached: "+currentFloor);
+            System.out.println("Floors Reached: "+currentFloor.getFloor());
             System.out.println("Level Reached: "+hero.getLevel());
             System.out.println("Money Obtained: "+hero.getMoney());
             System.exit(0);
@@ -117,32 +114,32 @@ class Main {
 
   private static Dungeon[] createDungeons() {
     //random number of rooms + treasure room chance
-    Dungeon floorOne = new Dungeon(rand.nextInt(9 - 6) + 6, 25,1,3);
-    Dungeon floorTwo = new Dungeon(rand.nextInt(11 - 6) + 6, 10,2,4);
-    Dungeon floorThree = new Dungeon(rand.nextInt(12 - 8) + 8, 15,3,5);
+    Dungeon floorOne = new Dungeon(rand.nextInt(9 - 6) + 6, 25,1,3,1);
+    Dungeon floorTwo = new Dungeon(rand.nextInt(11 - 6) + 6, 10,2,4,1);
+    Dungeon floorThree = new Dungeon(rand.nextInt(12 - 8) + 8, 15,3,5,1);
 
     Dungeon[] floors = {floorOne,floorTwo,floorThree};
     
     return floors;
   }
-  public static Creature[] createMonsters(int[] lvl) {
+  public static Creature[] createMonsters(int lvl) {
     // uncertain how levels for monsters will work. maybe a multiplyer? ex. level 4
     // rat multiples all its stats by 1.4 or 4?
     // also how do i make this a .csv file so it looks better
 
     // floor one monsters
-    Creature goblin = new Creature(1, "Goblin", 3, 7,createWeapon(lvl, false));
-    Creature rat = new Creature(1, "Rat", 1, 3,createWeapon(lvl, false));
-    Creature skelly = new Creature(1, "Skelly", 2, 5,createWeapon(lvl, false));
-    Creature golem = new Creature(1, "Stone Golem", 2, 15,createWeapon(lvl, false));
-    Creature slime = new Creature(1, "Slime", 3, 5,createWeapon(lvl, false));
+    Creature goblin = new Creature(lvl, "Goblin", 3, 7,createWeapon(lvl, false));
+    Creature rat = new Creature(lvl, "Rat", 1, 3,createWeapon(lvl, false));
+    Creature skelly = new Creature(lvl, "Skelly", 2, 5,createWeapon(lvl, false));
+    Creature golem = new Creature(lvl, "Stone Golem", 2, 15,createWeapon(lvl, false));
+    Creature slime = new Creature(lvl, "Slime", 3, 5,createWeapon(lvl, false));
 
     Creature[] monsters = { goblin, rat, skelly, golem, slime };
     
     return monsters;
   }
 
-  public static Player printIntro() {
+  public static Player printIntro(Scanner scn, PrintStream recordStream) {
     System.out.println("-_-_-_-_-_-_-_-_-");
     System.out.println("TOWERING TOASTER");
     System.out.println("-_-_-_-_-_-_-_-_-\n");
@@ -155,8 +152,7 @@ class Main {
     // random starting health between 40-35
     int health = rand.nextInt(41 - 35) + 35;
     int attackPwr = rand.nextInt(4 - 2) + 2;
-    int startingWeaponLevel[] = {1,2};
-    Player hero = new Player(1, name, health,10,createWeapon(startingWeaponLevel, true));
+    Player hero = new Player(1, name, health,10,createWeapon(1, true),recordStream);
 
     System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + ", HEALTH of "+ health + ", and is equiped with a "+hero.getWeapon().getName()+"\n");
 
@@ -171,15 +167,15 @@ class Main {
 
     return hero;
   }
-  public static Weapon createWeapon(int[] lvl, boolean whoIsIt){
-    int weaponLevel = rand.nextInt(lvl[1]-lvl[0])+lvl[0];
+  public static Weapon createWeapon(int weaponLevel, boolean whoIsIt){
+    //int weaponLevel = rand.nextInt(lvl[1]-lvl[0])+lvl[0];
     String[][] weapons = {/*blades*/{"Sword","Katana","Dagger","Rapier","Kukri"},/*bludgeon*/{"Mace","War Hammer","Brass Knuckles","Flails","Staves"},/*Spears*/{"Spear","Pike","lance","Halberd","Glaive"}};
     int weaponName = rand.nextInt(5);
     int weaponType = rand.nextInt(3);
     return new Weapon(weaponLevel, weapons[weaponType][weaponName], weaponType, whoIsIt);
 
   }
-  public static Weapon treasureRoom(int[] lvl,Creature creature){
+  public static Weapon treasureRoom(int lvl,Creature creature,Scanner scn){
     Weapon newWeapon = createWeapon(lvl, true);
 
     System.out.println("Wandering into the next room, your greeted with a golden chest sitting in the middle of the room! as you open the chest your eyes are greeted with a LVL."+newWeapon.getLvl()+" "+newWeapon.getName()+"!");
@@ -199,13 +195,20 @@ class Main {
       }
   }
   public static void whatWillYouDo(Player hero){
+    
+    int choice = 100;
     System.out.println("===What Will You do?===");
     System.out.println("0) Continue to next room");
     System.out.println("1) "+hero.getName()+"'s Stats");
     System.out.println("2) Weapon Stats");
     System.out.println("3) Use Campfire ("+hero.getCampfire()+"/3)");
-    int choice = scn.nextInt();
-
+    try{
+     choice = new Scanner(System.in).nextInt();
+    }
+    catch(InputMismatchException e){
+      System.out.println("Inccorect Input Error: Only numerical inputs within the range allowed.");
+      whatWillYouDo(hero);
+    }
     switch(choice){
       case 0:
         break;
@@ -233,10 +236,37 @@ class Main {
           whatWillYouDo(hero);
         }
       default:
+        System.out.println("Inccorect Input Error: Only numerical inputs within the range allowed.");
+        whatWillYouDo(hero);
         break;
 
     } 
 
+  }
+  public static void mainMenu(Scanner consoleScn, Scanner fileScn){
+    System.out.println();
+    System.out.println("-_-_-_-_-_-_-_-_-");
+    System.out.println("TOWERING TOASTER");
+    System.out.println("-_-_-_-_-_-_-_-_-\n");
+    System.out.println("0) New Game");
+    System.out.println("1) Continue Game (Does not work yet)");
+    System.out.println("2) Records");
+    System.out.println("3) Tutorial");
+    System.out.println("-_-_-_-_-_-_-_-_-\n");
+    int choice = consoleScn.nextInt();
+
+    switch(choice){
+      case 0:
+        break;
+      
+      case 1:
+        System.out.println("Doesnt work yet");
+        mainMenu(consoleScn, fileScn);
+        break;
+      case 2:
+       
+       break;
+    }
   }
 
 

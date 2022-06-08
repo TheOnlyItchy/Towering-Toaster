@@ -6,7 +6,7 @@ public class Creature{
     int attackPwr;
     int health;
     Weapon weapon;
-    int maxHealth = health;
+    int maxHealth;
     Random rand = new Random();
     public Creature(int level,String name,int attackPwr, int health, Weapon weapon){
         this.level = level;
@@ -14,6 +14,8 @@ public class Creature{
         this.attackPwr = attackPwr;
         this.health = health;
         this.weapon = weapon;
+        maxHealth = health;
+        
     }
 
     public int getHealth(){
