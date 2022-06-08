@@ -16,7 +16,7 @@ public class Battle {
         enemy.changeLevel(floor.getRandomLevel());
 
         //=======================//
-        System.out.println("Wandering into the next room, you spot a LVL."+enemy.getLevel()+" "+enemy.name+" weilding a "+enemy.getWeapon().getName()+"!\n");
+        System.out.print("Wandering into the next room, you spot a LVL."+enemy.getLevel()+" "+enemy.name+" weilding a "+enemy.getWeapon().getName()+"!\n");
       
         //Begin the battle
         while(hero.getHealth()>0||enemy.getHealth()>0){
@@ -24,6 +24,7 @@ public class Battle {
         int playerChoice = choiceMenu();
         int enemyChoice = rand.nextInt(3);
         System.out.println();
+        if(hero.getHealth()>0||enemy.getHealth()>0){}
         clash(playerChoice, enemyChoice);
         }
         //end the battle
@@ -37,13 +38,13 @@ public class Battle {
         }
     }
     public int choiceMenu(){
-      System.out.println();
-        System.out.println("What will you do!");
-        System.out.println("==========");
+        System.out.println();
+        System.out.println("("+hero.getName()+"'s HP: "+hero.getHealth()+"/"+hero.getMaxHealth()+") ("+enemy.getName()+"'s HP: "+enemy.getHealth()+"/"+enemy.getMaxHealth()+")");
+        System.out.println("===What Will You do!===");
         System.out.println("0) Attack");
         System.out.println("1) Block");
         System.out.println("2) Grab");
-        System.out.println("==========");
+        System.out.println("");
         return scn.nextInt();
         
     }
@@ -77,7 +78,7 @@ public class Battle {
         //Unsuccessful Block
         else if(pChoice == 0 && eChoice == 1){
             int damage = enemy.blockDmg();
-            System.out.println("As the "+enemy.getName()+" raises there "+enemy.getWeapon().getName()+", you swing your "+hero.getWeapon().getName()+", however your stirke isnt strong enough causing you bounch back!");
+            System.out.println("As the "+enemy.getName()+" raises there "+enemy.getWeapon().getName()+", you swing your "+hero.getWeapon().getName()+", however your stirke isnt strong enough causing you to bounch back!");
                                
             hero.takeDamage(damage);
         }

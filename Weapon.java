@@ -27,19 +27,19 @@ public class Weapon {
                 dmgMin = 3*lvl;
                 dmgMax = 5*lvl;
                 crit = 20;
-                block = 3*lvl;
+                block = 4*lvl;
                 break;
             case 1: //Hammer high damage, High block, low crit chance
                 dmgMin = 5*lvl;
                 dmgMax = 9*lvl;
                 crit = 10;
-                block = 5*lvl;
+                block = 9*lvl;
                 break;
             case 2: //Spear low to high damage, low block, high crit chance
                 dmgMin = 2*lvl;
                 dmgMax = 7*lvl;
                 crit = 30;
-                block = 2*lvl;
+                block = 3*lvl;
                 break;
         }
         
@@ -75,6 +75,9 @@ public class Weapon {
     }
     public int getBlock() {
         return block;
+    }
+    public int getLvl() {
+        return lvl;
     }
     
 

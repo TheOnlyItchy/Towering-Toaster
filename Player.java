@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Player extends Creature{
+
     private int level;
     private String name;
     private int attackPwr;
@@ -10,7 +11,9 @@ public class Player extends Creature{
     private Weapon weapon;
     private int xpLimit = 100;
     private int xp;
+    private int campFire = 3;
     private Random rand = new Random();
+
     public Player(int level,String name,int health, int money,Weapon weapon){
         
         super(level,name,0,health,weapon);
@@ -21,6 +24,7 @@ public class Player extends Creature{
         this.money = money;
         maxHealth = health;
         this.weapon = weapon;
+        
     }
     public void changeMoney(int gains, boolean affect){
         if(!affect){
@@ -54,9 +58,11 @@ public class Player extends Creature{
     }
     public void listStats() {
         System.out.println("---"+name+"---");
-        System.out.println("Weapon: "+weapon);
-        System.out.println("Level: "+level);
+        System.out.println("Weapon: "+weapon.getName());
         System.out.println("Money: "+money);
+        System.out.println("Level: "+level);
+        System.out.println("XP: "+xp+"/"+xpLimit);
+        System.out.println("HP: "+health+"/"+maxHealth);
         System.out.println("------------");
         
     }
@@ -83,6 +89,15 @@ public class Player extends Creature{
       System.out.println("================");
       
         health+=addMaxHealth;
+    }
+    public int getCampfire(){
+        return campFire;
+    }
+    public void resetCampfire(){
+        campFire = 3;
+    }
+    public void useCampfire(){
+        campFire -= 1;
     }
   
     

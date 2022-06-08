@@ -6,6 +6,7 @@ public class Creature{
     int attackPwr;
     int health;
     Weapon weapon;
+    int maxHealth = health;
     Random rand = new Random();
     public Creature(int level,String name,int attackPwr, int health, Weapon weapon){
         this.level = level;
@@ -18,18 +19,21 @@ public class Creature{
     public int getHealth(){
         return health;
     }
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
     public void takeDamage(int damage){
-        health =- damage;
-        System.out.println("You take -"+damage+" DMG! (HP:"+health+")");
+        health -= damage;
+        System.out.println("You take -"+damage+" DMG! (HP:"+this.health+")");
     }
   public void takeDamageNoTxt(int damage){
-        health =- damage;
+        health -= damage;
         
     }
 
     public void heal(int healing){
-        health =+ healing;
+        health += healing;
         System.out.println("You heal +"+healing+" HP! (HP:"+health+")");
     }
 
@@ -76,5 +80,8 @@ public class Creature{
     }
     public String getName() {
         return name;
+    }
+    public void changeWeapon(Weapon newWeapon){
+        newWeapon = weapon;
     }
 }
