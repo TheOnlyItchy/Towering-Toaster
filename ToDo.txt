@@ -7,4 +7,4 @@ Other Things
 - level progresion (maybe not this one) ===DONE===
 - money ==DONE==
 - populate treasure rooms
-- fix the health, doesnt work?
+- fix the health, doesnt work? ===DONE===
