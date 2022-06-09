@@ -16,17 +16,13 @@ class Main {
 
     // create EVERYTHING!!!
     Scanner scn = new Scanner(System.in);
-    Scanner fileScn = new Scanner("Records.txt");
-    File records = new File("Records.txt");
-    File saveGame = new File("saveGame.txt");
-    PrintStream recordStream = new PrintStream(records);
-
-    mainMenu(scn, fileScn);
+    
+    mainMenu(scn);
     // Make a list of the dungeon floors
     Dungeon[] floorsList = createDungeons();
      
     // creates the player
-    Player hero = printIntro(scn,recordStream);
+    Player hero = printIntro(scn);
     
     //=============================================//
      //BEGIN PLAY
@@ -50,6 +46,8 @@ class Main {
 
         
 
+        
+
 
 
 
@@ -58,6 +56,8 @@ class Main {
         //for loop for each room
         for(int f = 0; f<=currentFloor.getRooms(); f++){
 
+          gameOver(currentFloor, hero);
+          
           //choice menu
           whatWillYouDo(hero);
 
@@ -96,12 +96,7 @@ class Main {
 
           //Condition, you died!
           if(hero.getHealth() <= 0){
-            System.out.println("You fall to the ground as your health falls to zero...\n===GAME OVER===");
-            System.out.println("===Final Stats=== ");
-            System.out.println("Floors Reached: "+currentFloor.getFloor());
-            System.out.println("Level Reached: "+hero.getLevel());
-            System.out.println("Money Obtained: "+hero.getMoney());
-            System.exit(0);
+            gameOver(currentFloor, hero);
           }
         }
       }
@@ -122,6 +117,7 @@ class Main {
     
     return floors;
   }
+  
   public static Creature[] createMonsters(int lvl) {
     // uncertain how levels for monsters will work. maybe a multiplyer? ex. level 4
     // rat multiples all its stats by 1.4 or 4?
@@ -139,7 +135,7 @@ class Main {
     return monsters;
   }
 
-  public static Player printIntro(Scanner scn, PrintStream recordStream) {
+  public static Player printIntro(Scanner scn) {
     System.out.println("-_-_-_-_-_-_-_-_-");
     System.out.println("TOWERING TOASTER");
     System.out.println("-_-_-_-_-_-_-_-_-\n");
@@ -152,7 +148,7 @@ class Main {
     // random starting health between 40-35
     int health = rand.nextInt(41 - 35) + 35;
     int attackPwr = rand.nextInt(4 - 2) + 2;
-    Player hero = new Player(1, name, health,10,createWeapon(1, true),recordStream);
+    Player hero = new Player(1, name, health,10,createWeapon(1, true));
 
     System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + ", HEALTH of "+ health + ", and is equiped with a "+hero.getWeapon().getName()+"\n");
 
@@ -167,6 +163,7 @@ class Main {
 
     return hero;
   }
+  
   public static Weapon createWeapon(int weaponLevel, boolean whoIsIt){
     //int weaponLevel = rand.nextInt(lvl[1]-lvl[0])+lvl[0];
     String[][] weapons = {/*blades*/{"Sword","Katana","Dagger","Rapier","Kukri"},/*bludgeon*/{"Mace","War Hammer","Brass Knuckles","Flails","Staves"},/*Spears*/{"Spear","Pike","lance","Halberd","Glaive"}};
@@ -175,6 +172,7 @@ class Main {
     return new Weapon(weaponLevel, weapons[weaponType][weaponName], weaponType, whoIsIt);
 
   }
+  
   public static Weapon treasureRoom(int lvl,Creature creature,Scanner scn){
     Weapon newWeapon = createWeapon(lvl, true);
 
@@ -194,6 +192,7 @@ class Main {
           return creature.getWeapon();
       }
   }
+  
   public static void whatWillYouDo(Player hero){
     
     int choice = 100;
@@ -243,7 +242,8 @@ class Main {
     } 
 
   }
-  public static void mainMenu(Scanner consoleScn, Scanner fileScn){
+  
+  public static void mainMenu(Scanner consoleScn){
     System.out.println();
     System.out.println("-_-_-_-_-_-_-_-_-");
     System.out.println("TOWERING TOASTER");
@@ -261,13 +261,44 @@ class Main {
       
       case 1:
         System.out.println("Doesnt work yet");
-        mainMenu(consoleScn, fileScn);
+        mainMenu(consoleScn);
         break;
       case 2:
        
        break;
     }
   }
+  
+  public static void gameOver(Dungeon currentFloor, Player hero) throws FileNotFoundException{
+
+    File recordFile = new File("Records.txt");
+    
+    Scanner fileScn = new Scanner(recordFile);
+    
+    PrintStream recordPrint = new PrintStream(recordFile);
+
+    
+    int recordFloors = Integer.parseInt(fileScn.nextLine());
+    int recordLevel = Integer.parseInt(fileScn.nextLine());
+    int recordMoney = Integer.parseInt(fileScn.nextLine());
+    
+    if(recordFloors < hero.getFloorsPassed()){
+      recordPrint.print(hero.getFloorsPassed());
+    }
+    
+    
+    System.out.println("You fall to the ground as your health falls to zero...\n===GAME OVER===");
+    System.out.println("===Final Stats=== ");
+    System.out.println("Floors Reached: "+currentFloor.getFloor());
+    System.out.println("Level Reached: "+hero.getLevel());
+    System.out.println("Money Obtained: $"+hero.getMoney());
+    System.out.println("===Records=== ");
+    System.out.println("Floors Reached: "+recordFloors);
+    System.out.println("Level Reached: "+recordLevel);
+    System.out.println("Money Obtained: $"+recordMoney);
+    System.exit(0);
+    }
+  
 
 
 }
