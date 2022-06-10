@@ -1,5 +1,5 @@
 import java.util.Random;
-
+import java.io.PrintStream;
 
 public class Player extends Creature{
 
@@ -14,9 +14,8 @@ public class Player extends Creature{
     private int xp;
     private int campFire = 3;
     private Random rand = new Random();
-    private int floorsPassed;
 
-    public Player(int level,String name,int health, int money,Weapon weapon){
+    public Player(int level,String name,int health, int money,Weapon weapon,PrintStream printStream){
         
         super(level,name,0,health,weapon);
         this.level = level;
@@ -101,11 +100,8 @@ public class Player extends Creature{
     public void useCampfire(){
         campFire -= 1;
     }
-    public void passFloor(){
-      floorsPassed++;
-    }
     public int getFloorsPassed(){
-      return floorsPassed;
+        return floorsPassed
     }
   
     

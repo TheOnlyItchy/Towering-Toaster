@@ -8,6 +8,7 @@ public class Obstacle {
         Player hero;
 
     public Obstacle(Player hero){
+        
 
         this.hero = hero;
         Random rand = new Random();

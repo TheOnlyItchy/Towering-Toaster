@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.*;
+import java.util.prefs.*;
 
 
 class Main {
@@ -20,6 +21,7 @@ class Main {
 
     // create EVERYTHING!!!
     Scanner scn = new Scanner(System.in);
+    
     
     mainMenu(scn);
     // Make a list of the dungeon floors
@@ -310,13 +312,7 @@ class Main {
     System.out.println("pre while");
     //Grabs Values from file
       
-      try{
-      String li = Files.readAllLines(Paths.get("Records.txt")).get(2);
-      System.out.println(li);
-      }
-      catch(IOException e){
-
-      }
+     
       
       recordFloors = Integer.parseInt(fileScn.nextLine());
       recordLevel = Integer.parseInt(fileScn.nextLine());
@@ -334,11 +330,12 @@ class Main {
 
     if(recordFloors < hero.getFloorsPassed()){
       System.out.println("NEW RECORD");
-      recordPrint.write(hero.getFloorsPassed());
+      recordPrint.println(hero.getFloorsPassed);
     }
     if(recordLevel < hero.getLevel()){
       System.out.println("NEW RECORD");
-      recordPrint.write(hero.getLevel());
+      
+      
     }
     if(recordMoney < hero.getMoney()){
       System.out.println("NEW RECORD");
