@@ -4,13 +4,17 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.*;
 
 
 class Main {
   public static final Random rand = new Random();
 
-  public static void main(String[] args)throws FileNotFoundException{
+  public static void main(String[] args)throws FileNotFoundException, IOException{
 
     
 
@@ -55,8 +59,9 @@ class Main {
         
         //for loop for each room
         for(int f = 0; f<=currentFloor.getRooms(); f++){
-
+          
           gameOver(currentFloor, hero);
+          
           
           //choice menu
           whatWillYouDo(hero);
@@ -95,9 +100,9 @@ class Main {
           }
 
           //Condition, you died!
-          if(hero.getHealth() <= 0){
+          
             gameOver(currentFloor, hero);
-          }
+            
         }
       }
       break;
@@ -269,36 +274,82 @@ class Main {
     }
   }
   
-  public static void gameOver(Dungeon currentFloor, Player hero) throws FileNotFoundException{
+  public static void gameOver(Dungeon currentFloor, Player hero)throws FileNotFoundException {
 
-    File recordFile = new File("Records.txt");
-    
-    Scanner fileScn = new Scanner(recordFile);
-    
-    PrintStream recordPrint = new PrintStream(recordFile);
-
-    
-    int recordFloors = Integer.parseInt(fileScn.nextLine());
-    int recordLevel = Integer.parseInt(fileScn.nextLine());
-    int recordMoney = Integer.parseInt(fileScn.nextLine());
-    
-    if(recordFloors < hero.getFloorsPassed()){
-      recordPrint.print(hero.getFloorsPassed());
-    }
-    
     
     System.out.println("You fall to the ground as your health falls to zero...\n===GAME OVER===");
     System.out.println("===Final Stats=== ");
     System.out.println("Floors Reached: "+currentFloor.getFloor());
     System.out.println("Level Reached: "+hero.getLevel());
     System.out.println("Money Obtained: $"+hero.getMoney());
+    
+      printRecords(hero);
+     
+       
+    System.exit(0);
+    
+    
+  
+
+
+}
+  public static void printRecords(Player hero)throws FileNotFoundException{
+    int recordFloors = 0;
+    int recordLevel = 0;
+    int recordMoney = 0;
+
+    
+
+    //File things
+    File recordFile = new File("Records.txt");
+
+    Scanner fileScn = new Scanner(recordFile);
+    
+    PrintStream recordPrint = new PrintStream(new FileOutputStream(recordFile, true));
+
+    System.out.println("pre while");
+    //Grabs Values from file
+      
+      try{
+      String li = Files.readAllLines(Paths.get("Records.txt")).get(2);
+      System.out.println(li);
+      }
+      catch(IOException e){
+
+      }
+      
+      recordFloors = Integer.parseInt(fileScn.nextLine());
+      recordLevel = Integer.parseInt(fileScn.nextLine());
+      recordMoney = Integer.parseInt(fileScn.nextLine());  
+    
+    System.out.println("post while");
+    System.out.println(recordFloors);
+    System.out.println(recordLevel);
+    System.out.println(recordMoney);
+
+    hero.changeMoney(100, true);
+    System.out.println("post change money");
+    
+    
+
+    if(recordFloors < hero.getFloorsPassed()){
+      System.out.println("NEW RECORD");
+      recordPrint.write(hero.getFloorsPassed());
+    }
+    if(recordLevel < hero.getLevel()){
+      System.out.println("NEW RECORD");
+      recordPrint.write(hero.getLevel());
+    }
+    if(recordMoney < hero.getMoney()){
+      System.out.println("NEW RECORD");
+      recordPrint.write(hero.getMoney());
+    }
+
     System.out.println("===Records=== ");
     System.out.println("Floors Reached: "+recordFloors);
     System.out.println("Level Reached: "+recordLevel);
     System.out.println("Money Obtained: $"+recordMoney);
-    System.exit(0);
-    }
   
-
-
+  }
+  
 }
