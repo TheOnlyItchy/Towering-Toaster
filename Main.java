@@ -61,6 +61,8 @@ class Main {
         
         //for loop for each room
         for(int f = 0; f<=currentFloor.getRooms(); f++){
+          //passes floor
+          hero.passFloor();
           
           gameOver(currentFloor, hero);
           
@@ -307,7 +309,7 @@ class Main {
 
     Scanner fileScn = new Scanner(recordFile);
     
-    PrintStream recordPrint = new PrintStream(new FileOutputStream(recordFile, true));
+   
 
     System.out.println("pre while");
     //Grabs Values from file
@@ -317,36 +319,59 @@ class Main {
       recordFloors = Integer.parseInt(fileScn.nextLine());
       recordLevel = Integer.parseInt(fileScn.nextLine());
       recordMoney = Integer.parseInt(fileScn.nextLine());  
-    
-    System.out.println("post while");
-    System.out.println(recordFloors);
-    System.out.println(recordLevel);
-    System.out.println(recordMoney);
 
-    hero.changeMoney(100, true);
-    System.out.println("post change money");
+      PrintStream recordPrint = new PrintStream(recordFile);
     
     
-
+    hero.passFloor();
+    hero.passFloor();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    hero.gainXp();
+    System.out.println("====================================="+hero.getLevel());
+    
+    
+    System.out.println("===Records=== ");
     if(recordFloors < hero.getFloorsPassed()){
-      System.out.println("NEW RECORD");
-      recordPrint.println(hero.getFloorsPassed);
+      System.out.println("(NEW RECORD) Floors Reached: "+hero.getFloorsPassed());
+      recordPrint.println(hero.getFloorsPassed());
+    }
+    else{
+      recordPrint.println(recordFloors);
+      System.out.println("Floors Reached: "+recordFloors);
     }
     if(recordLevel < hero.getLevel()){
-      System.out.println("NEW RECORD");
-      
-      
+      System.out.println("(NEW RECORD) Level Reached: "+hero.getLevel());
+      recordPrint.println(hero.getLevel());
+    }
+    else{
+      System.out.println("Level Reached: "+recordLevel);
+      recordPrint.println(recordLevel);
     }
     if(recordMoney < hero.getMoney()){
-      System.out.println("NEW RECORD");
-      recordPrint.write(hero.getMoney());
+      System.out.println("(NEW RECORD) Money Obtained: $"+hero.getMoney());
+      recordPrint.println(hero.getMoney());
     }
-
-    System.out.println("===Records=== ");
-    System.out.println("Floors Reached: "+recordFloors);
-    System.out.println("Level Reached: "+recordLevel);
-    System.out.println("Money Obtained: $"+recordMoney);
-  
+    else{
+      System.out.println("Money Obtained: $"+recordMoney);
+      recordPrint.println(recordMoney);
+    }
+    
+    
+    
+    
   }
   
 }
