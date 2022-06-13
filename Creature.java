@@ -3,16 +3,14 @@ import java.util.Random;
 public class Creature{
     int level;
     String name;
-    int attackPwr;
-    int health;
+    protected int health;
     Weapon weapon;
-    int maxHealth;
+    protected int maxHealth;
     Random rand = new Random();
-    public Creature(int level,String name,int attackPwr, int health, Weapon weapon){
+    public Creature(int level,String name, int health, Weapon weapon){
         this.level = level;
         this.name = name;
-        this.attackPwr = attackPwr;
-        this.health = health;
+        this.health = health*level;
         this.weapon = weapon;
         maxHealth = health;
         
@@ -52,8 +50,8 @@ public class Creature{
     public int blockDmg(){
         int baseDmg = weapon.getBlock();
         if(weapon.isCrit() && weapon.whoIsIt){
-            System.out.println("CRITICAL STRIKE!");
-            return baseDmg * 3;
+            System.out.println("CRITICAL BLOCK!");
+            return baseDmg * 5;
         }
         else{
             return baseDmg;

@@ -4,18 +4,13 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.*;
-import java.util.prefs.*;
 
 
 class Main {
   public static final Random rand = new Random();
 
-  public static void main(String[] args)throws FileNotFoundException, IOException{
+  public static void main(String[] args)throws FileNotFoundException{
 
     
 
@@ -30,6 +25,7 @@ class Main {
     // creates the player
     Player hero = printIntro(scn);
     
+    
     //=============================================//
      //BEGIN PLAY
     while (hero.getHealth() > 0) {
@@ -40,9 +36,8 @@ class Main {
         Dungeon currentFloor = floorsList[i];
 
         //prints intro for floor
-        System.out.println("Steping down the stairs, you obseve on your map that this floor has "+currentFloor.getRooms()+" rooms.\n(Enter anything to continue)");
-        scn.next();
-        System.out.println();
+        System.out.println("Steping down the stairs, you obseve on your map that this floor has "+currentFloor.getRooms()+" rooms.");
+        continuePlay(scn);
 
         //determines the min max levels for this floor
         int lvl[] = {floorsList[i].getMinLevel(),floorsList[i].getMaxLevel()};
@@ -64,7 +59,6 @@ class Main {
           //passes floor
           hero.passFloor();
           
-          gameOver(currentFloor, hero);
           
           
           //choice menu
@@ -76,37 +70,35 @@ class Main {
             System.out.println("As your aprouch the doors of the last room, you notice the bodys of other heros around you...");
             Creature boss = monstersList[rand.nextInt(monstersList.length)];
             boss.changeLevel(lvl[1]*2);
-            Battle battle = new Battle(hero, boss, currentFloor);
+            new Battle(hero, boss, currentFloor);
           }
           else{
 
             //if its a obstacle
             if (currentFloor.isItObstacle()){
               new Obstacle(hero);
-              System.out.println("(Enter anything to continue)");
-                scn.next();
+              continuePlay(scn);
+              
             }
 
             //if its a Treasure Room
             else if(currentFloor.isItTreasureRoom()){
               treasureRoom(currentFloor.getRandomLevel(), hero,scn);
-              System.out.println("(Enter anything to continue)");
-              scn.next();
+              continuePlay(scn);
               
             }
           
             //if not, then its a battle
             else{
-              Battle battle = new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
-              System.out.println("(Enter anything to continue)");
-                scn.next();
+              new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
+              continuePlay(scn);
             }
           }
 
           //Condition, you died!
-          
+          if(hero.getHealth() <= 0){
             gameOver(currentFloor, hero);
-            
+          }
         }
       }
       break;
@@ -118,9 +110,9 @@ class Main {
 
   private static Dungeon[] createDungeons() {
     //random number of rooms + treasure room chance
-    Dungeon floorOne = new Dungeon(rand.nextInt(9 - 6) + 6, 25,1,3,1);
-    Dungeon floorTwo = new Dungeon(rand.nextInt(11 - 6) + 6, 10,2,4,1);
-    Dungeon floorThree = new Dungeon(rand.nextInt(12 - 8) + 8, 15,3,5,1);
+    Dungeon floorOne = new Dungeon(rand.nextInt(9 - 6) + 6, 25,1,2,1);
+    Dungeon floorTwo = new Dungeon(rand.nextInt(11 - 6) + 6, 10,1,4,1);
+    Dungeon floorThree = new Dungeon(rand.nextInt(12 - 8) + 8, 15,2,5,1);
 
     Dungeon[] floors = {floorOne,floorTwo,floorThree};
     
@@ -133,11 +125,11 @@ class Main {
     // also how do i make this a .csv file so it looks better
 
     // floor one monsters
-    Creature goblin = new Creature(lvl, "Goblin", 3, 7,createWeapon(lvl, false));
-    Creature rat = new Creature(lvl, "Rat", 1, 3,createWeapon(lvl, false));
-    Creature skelly = new Creature(lvl, "Skelly", 2, 5,createWeapon(lvl, false));
-    Creature golem = new Creature(lvl, "Stone Golem", 2, 15,createWeapon(lvl, false));
-    Creature slime = new Creature(lvl, "Slime", 3, 5,createWeapon(lvl, false));
+    Creature goblin = new Creature(lvl, "Goblin", 7,createWeapon(lvl, false));
+    Creature rat = new Creature(lvl, "Rat",3,createWeapon(lvl, false));
+    Creature skelly = new Creature(lvl, "Skelly",5,createWeapon(lvl, false));
+    Creature golem = new Creature(lvl, "Stone Golem", 15,createWeapon(lvl, false));
+    Creature slime = new Creature(lvl, "Slime", 8,createWeapon(lvl, false));
 
     Creature[] monsters = { goblin, rat, skelly, golem, slime };
     
@@ -161,11 +153,8 @@ class Main {
 
     System.out.println("it seems you hero is a strong fellow with the a STRENGTH of " + attackPwr + ", HEALTH of "+ health + ", and is equiped with a "+hero.getWeapon().getName()+"\n");
 
-    
-
-    
-    System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!\n(Enter anything to continue)");
-    scn.next();
+    System.out.println("Standing before the gaping stone arches of the DUNGEON, you still your beating heart and take the plundge!");
+    continuePlay(scn);
     System.out.println();
 
     
@@ -211,7 +200,7 @@ class Main {
     System.out.println("2) Weapon Stats");
     System.out.println("3) Use Campfire ("+hero.getCampfire()+"/3)");
     try{
-     choice = new Scanner(System.in).nextInt();
+      choice = new Scanner(System.in).nextInt();
     }
     catch(InputMismatchException e){
       System.out.println("Inccorect Input Error: Only numerical inputs within the range allowed.");
@@ -252,7 +241,7 @@ class Main {
 
   }
   
-  public static void mainMenu(Scanner consoleScn){
+  public static void mainMenu(Scanner consoleScn)throws FileNotFoundException{
     System.out.println();
     System.out.println("-_-_-_-_-_-_-_-_-");
     System.out.println("TOWERING TOASTER");
@@ -273,8 +262,18 @@ class Main {
         mainMenu(consoleScn);
         break;
       case 2:
-       
+       printRecords(new Player(0, "test", 1, 0, new Weapon(0, "test", 0, true)));
+       mainMenu(consoleScn);
        break;
+      case 3:
+        Scanner fileScn = new Scanner(new File("Tutorial.txt"));
+        while(fileScn.hasNextLine()){
+          String line = fileScn.nextLine();
+          System.out.println(line);
+        }
+        fileScn.close();
+        mainMenu(consoleScn);
+        break;
     }
   }
   
@@ -286,6 +285,7 @@ class Main {
     System.out.println("Floors Reached: "+currentFloor.getFloor());
     System.out.println("Level Reached: "+hero.getLevel());
     System.out.println("Money Obtained: $"+hero.getMoney());
+    System.out.println("================= ");
     
       printRecords(hero);
      
@@ -311,7 +311,7 @@ class Main {
     
    
 
-    System.out.println("pre while");
+    
     //Grabs Values from file
       
      
@@ -320,29 +320,14 @@ class Main {
       recordLevel = Integer.parseInt(fileScn.nextLine());
       recordMoney = Integer.parseInt(fileScn.nextLine());  
 
-      PrintStream recordPrint = new PrintStream(recordFile);
+
+    PrintStream recordPrint = new PrintStream(recordFile);
     
     
-    hero.passFloor();
-    hero.passFloor();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    hero.gainXp();
-    System.out.println("====================================="+hero.getLevel());
-    
-    
+    //file contents store, deletes file, checks if original value is greater, if so
+    //replaces the original value, if not, repirnts the orignial value
+    //maybe a better way to do this using fileWriter? append somehow?
+
     System.out.println("===Records=== ");
     if(recordFloors < hero.getFloorsPassed()){
       System.out.println("(NEW RECORD) Floors Reached: "+hero.getFloorsPassed());
@@ -368,10 +353,15 @@ class Main {
       System.out.println("Money Obtained: $"+recordMoney);
       recordPrint.println(recordMoney);
     }
+    System.out.println("============= ");
     
     
     
     
+  }
+  public static void continuePlay(Scanner scn){
+    System.out.println("(Enter anything to continue)");
+    scn.next();
   }
   
 }

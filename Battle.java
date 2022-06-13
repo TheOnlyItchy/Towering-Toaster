@@ -29,9 +29,10 @@ public class Battle {
         //end the battle
       
         //Conclusion and outcome
-        if(enemy.getHealth()<0){
+        if(enemy.getHealth()<=0){
           System.out.println("You felled the LVL."+enemy.getLevel()+" "+enemy.name);
           hero.gainXp();
+          hero.changeMoney((rand.nextInt(11 - 5)-5)*enemy.getLevel(), true);
         }
     }
     public int choiceMenu(){

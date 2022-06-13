@@ -1,15 +1,12 @@
 import java.util.Random;
-import java.io.PrintStream;
 
 public class Player extends Creature{
 
     private int level;
     private String name;
-    private int attackPwr;
-    private int health;
+    //private int attackPwr;
     private int money;
     private int maxHealth;
-    private Weapon weapon;
     private int xpLimit = 100;
     private int xp;
     private int campFire = 3;
@@ -18,10 +15,10 @@ public class Player extends Creature{
 
     public Player(int level, String name, int health, int money, Weapon weapon){
         
-        super(level,name,0,health,weapon);
+        super(level,name,health,weapon);
         this.level = level;
         this.name = name;
-        this.attackPwr = attackPwr;
+        //this.attackPwr = attackPwr;
         this.health = health;
         this.money = money;
         maxHealth = health;
@@ -106,6 +103,9 @@ public class Player extends Creature{
     }
     public void passFloor(){
         floorsPassed++;
+    }
+    public int getLevel() {
+        return level;
     }
   
     

@@ -1,0 +1,82 @@
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+TOWERING TOASTER INTRUCTIONS
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+-INTRO-
+
+    Infinitly randomly generated dungeon cralwer. each floor has a random amount of rooms
+    with each room having a chance to be a battle, treasure room, or obstacle. there is no
+    end goal objective beside beating your highscore and finding all the secrets.
+
+-BATTLES-
+
+    Your options in a battle are to attack, block, or grab. it works like rock paper scissors.
+
+    Attack (rock) beats Grab (scissors)
+    Grab (scissors) beats Block (paper)
+    Block (paper) beats Attack (rock)
+
+    the diffrence being that each attack has diffrent damage potential.
+
+    -Attack
+        Does the damage range of the weapon. Can crit (i.e.your weapons range is 5 - 9 damage. you will do a number inbetween that inclusive)
+
+    -Grab
+        Will ALWAYS have a base damage of 10, multipled by your player level. Can not crit (i.e. Your player level is 2, you do 20 damage)
+
+    -Block
+        Does the block damage of your weapon. Crits do 5x instead of 3x damage. (i.e. your block is 5, you do 5 damage)
+
+-WEAPONs-
+
+    Weapons have 4 important stats, Block, Attack, Level, and Crit Chance. block and attack are
+    base unchanging numbers (Excluding crits). Weapon Level changes how strong your weapon is, unlike
+    player level, you cannot level up your weapon. Crit chance is how often your weapon will deal a 
+    critical. Critical attacks will deal x3 damage and critical blocks will deal 5x block damage.
+
+        ---Example---
+        Attack: 2 - 7
+        Block: 3
+        Level: 1
+        Crit: 30%
+        ------------
+
+-Dungeon Floors-
+
+    Each dungeon floor has a set ammount of rooms.
+
+    -Battle Rooms-
+        Will start a battle with a monster found on that floor Bosses will always be found in
+         the last room of a floor and have a increased level.
+
+    -Treasure Rooms-
+        Treasure rooms will always have a new weapon for you, your choice weather
+         you want it or not.
+
+    -Obstacle Rooms-
+        Obstacle rooms give you a choice that can affect anything about your charecter
+         positive or negative. Just cause you encouter the same room twice doesnt mean that the same
+        choice will always be the right one.
+
+-Player/Creatures-
+
+    Players have 4 important stats, Level, Health, Name, Money (Exclusive to the player), and their Weapon. Health
+    is the ammount of hitpoints they have before reaching 0 and ending in a game over. Name is the name the creature, who would
+    of guessed! Money currently serves no function beside braging rights and a sweet sweet number on the records screen.
+    Weapon is the current weapon that the creature is weilding, you can only have one at a time. level is the base level that
+    determinds your max health, unique to the player this level can change.
+
+    -Leveling-
+        Leveling allows the player to become stronger by increasing their max health. You can level once you gain enough XP.
+        XP is gained from slaying monsters.
+
+    -Campfires-
+        You the player on your journey will surly get hurt. when passing into a new room you are given the option to use a Campfires.
+        a Campfire has the abillity to heal your wounds. you can only carry a certain ammount at a time though. Campfire counter restored
+        to full once you complete a floor
+
+
+(Easier readabillity of this file can be found in the "Tutorial.txt" file in the root of the game)
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+    
