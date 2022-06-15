@@ -42,8 +42,7 @@ class Main {
         //determines the min max levels for this floor
         int lvl[] = {floorsList[i].getMinLevel(),floorsList[i].getMaxLevel()};
     
-        // makes a list of monsters
-        Creature monstersList[] = createMonsters(currentFloor.getRandomLevel());
+        
 
         
 
@@ -67,9 +66,9 @@ class Main {
 
           //last room = boss
           if(f == currentFloor.getRooms()){
-            System.out.println("As your aprouch the doors of the last room, you notice the bodys of other heros around you...");
-            Creature boss = monstersList[rand.nextInt(monstersList.length)];
-            boss.changeLevel(lvl[1]*2);
+            System.out.println("As your aprouch the doors of the last room, you notice the bodys of other heros around you...\n==BOSS==");
+            Creature boss = createMonsters(currentFloor, rand);
+            boss.changeLevel(currentFloor.getRandomLevel()*2);
             new Battle(hero, boss, currentFloor);
           }
           else{
@@ -90,7 +89,7 @@ class Main {
           
             //if not, then its a battle
             else{
-              new Battle(hero, monstersList[rand.nextInt(monstersList.length)], currentFloor);
+              new Battle(hero, createMonsters(currentFloor, rand), currentFloor);
               continuePlay(scn);
             }
           }
@@ -119,21 +118,13 @@ class Main {
     return floors;
   }
   
-  public static Creature[] createMonsters(int lvl) {
+  public static Creature createMonsters(Dungeon lvl, Random rand) {
     // uncertain how levels for monsters will work. maybe a multiplyer? ex. level 4
     // rat multiples all its stats by 1.4 or 4?
     // also how do i make this a .csv file so it looks better
 
-    // floor one monsters
-    Creature goblin = new Creature(lvl, "Goblin", 7,createWeapon(lvl, false));
-    Creature rat = new Creature(lvl, "Rat",3,createWeapon(lvl, false));
-    Creature skelly = new Creature(lvl, "Skelly",5,createWeapon(lvl, false));
-    Creature golem = new Creature(lvl, "Stone Golem", 15,createWeapon(lvl, false));
-    Creature slime = new Creature(lvl, "Slime", 8,createWeapon(lvl, false));
-
-    Creature[] monsters = { goblin, rat, skelly, golem, slime };
-    
-    return monsters;
+    String names[] = {"Mummy","Goblin","Rat","Skelly","Golem","Slime","Possesed Armour","Undead","Witch","Distraught Hero","Granite Behemoth"};
+    return new Creature(lvl.getRandomLevel(), names[rand.nextInt(names.length)], rand.nextInt(16-3)+3, createWeapon(lvl.getRandomLevel(), false));
   }
 
   public static Player printIntro(Scanner scn) {
@@ -297,6 +288,7 @@ class Main {
 
 
 }
+  
   public static void printRecords(Player hero)throws FileNotFoundException{
     int recordFloors = 0;
     int recordLevel = 0;
@@ -359,6 +351,7 @@ class Main {
     
     
   }
+  
   public static void continuePlay(Scanner scn){
     System.out.println("(Enter anything to continue)");
     scn.next();

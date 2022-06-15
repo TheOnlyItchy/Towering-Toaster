@@ -32,7 +32,7 @@ public class Battle {
         if(enemy.getHealth()<=0){
           System.out.println("You felled the LVL."+enemy.getLevel()+" "+enemy.name);
           hero.gainXp();
-          hero.changeMoney((rand.nextInt(11 - 5)-5)*enemy.getLevel(), true);
+          hero.changeMoney((rand.nextInt(11 - 5)+5)*enemy.getLevel(), true);
         }
     }
     public int choiceMenu(){
