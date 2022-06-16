@@ -107,6 +107,9 @@ public class Player extends Creature{
     public int getLevel() {
         return level;
     }
+    public void changeWeapon(Weapon newWeapon){
+        weapon = newWeapon;
+    }
   
     
 }

@@ -3,9 +3,9 @@ import java.util.Random;
 public class Creature{
     int level;
     String name;
-    protected int health;
+    int health;
     Weapon weapon;
-    protected int maxHealth;
+    int maxHealth;
     Random rand = new Random();
     public Creature(int level,String name, int health, Weapon weapon){
         this.level = level;
@@ -81,7 +81,5 @@ public class Creature{
     public String getName() {
         return name;
     }
-    public void changeWeapon(Weapon newWeapon){
-        newWeapon = weapon;
-    }
+    
 }

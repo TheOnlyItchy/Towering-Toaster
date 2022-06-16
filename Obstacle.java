@@ -2,16 +2,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Obstacle {
-    
-    public static final Scanner scn = new Scanner(System.in);
-
-        Player hero;
+    Player hero;
 
     public Obstacle(Player hero){
         
 
         this.hero = hero;
         Random rand = new Random();
+        Scanner scn = new Scanner(System.in);
 
         //Random 10 events that can happen (Currently 5)
         int event = rand.nextInt(5);
